@@ -1,349 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn dress designing, get AI-powered design ideas, and create beautiful dresses with step-by-step guides.">
-  <meta name="theme-color" content="#534AB7">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Shruti">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/png" href="/icon-192x192.png">
-  <link rel="apple-touch-icon" href="/icon-192x192.png">
-  <title>Shruti - Dress Design Learning App</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: #f5f3ed;
-      color: #1a1a1a;
-    }
-    .app-container {
-      max-width: 390px;
-      margin: 0 auto;
-      background: #f5f3ed;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .logo-banner {
-      background: linear-gradient(135deg, #D3AF91 0%, #A68373 100%);
-      padding: 24px 16px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      color: #fff;
-    }
-    .logo-display {
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-display svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-      animation: subtle-bounce 2s ease-in-out infinite;
-    }
-    @keyframes subtle-bounce {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
-    }
-    .logo-text h1 {
-      font-size: 24px;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-    }
-    .logo-text p {
-      font-size: 12px;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-    .header {
-      background: #fff;
-      padding: 16px;
-      border-bottom: 0.5px solid #e0ddd5;
-    }
-    .header-title {
-      font-size: 16px;
-      font-weight: 500;
-      color: #1a1a1a;
-      margin-bottom: 12px;
-    }
-    .nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .nav-btn {
-      padding: 8px 16px;
-      background: #efefea;
-      border: 0.5px solid #d3d1c7;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #5f5e5a;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .nav-btn:active, .nav-btn.active {
-      background: #534AB7;
-      color: #fff;
-      border-color: #534AB7;
-    }
-    .content {
-      padding: 16px;
-      flex: 1;
-      overflow-y: auto;
-    }
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      border: 0.5px solid #e0ddd5;
-      padding: 16px 20px;
-      margin-bottom: 12px;
-    }
-    .card-title {
-      font-size: 14px;
-      font-weight: 500;
-      color: #1a1a1a;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .card-title i {
-      font-size: 18px;
-      color: #534AB7;
-    }
-    .card-text {
-      font-size: 13px;
-      color: #5f5e5a;
-      line-height: 1.6;
-    }
-    .lesson-item {
-      background: #fff;
-      border-radius: 12px;
-      border: 0.5px solid #e0ddd5;
-      padding: 12px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-      user-select: none;
-    }
-    .lesson-item:active {
-      border-color: #534AB7;
-      background: #f9f8f6;
-    }
-    .lesson-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: #1a1a1a;
-    }
-    .lesson-desc {
-      font-size: 12px;
-      color: #5f5e5a;
-      margin-top: 4px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn dress designing, get AI-powered design ideas, and create beautiful dresses with step-by-step guides. Powered by Claude AI.">
+    <meta name="theme-color" content="#534AB7">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Shruti">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
+    <title>Shruti - Dress Design Learning App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f3ed;
+            color: #1a1a1a;
+        }
+
+        .app-container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: #f5f3ed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-banner {
+            background: linear-gradient(135deg, #D3AF91 0%, #A68373 100%);
+            padding: 24px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #fff;
+        }
+
+        .logo-display {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-display svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            animation: subtle-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes subtle-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .header {
+            background: #fff;
+            padding: 16px;
+            border-bottom: 0.5px solid #e0ddd5;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background: #efefea;
+            border: 0.5px solid #d3d1c7;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #5f5e5a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:active,
+        .nav-btn.active {
+            background: #534AB7;
+            color: #fff;
+            border-color: #534AB7;
+        }
+
+        .content {
+            padding: 16px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            border: 0.5px solid #e0ddd5;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 18px;
+            color: #534AB7;
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: #5f5e5a;
+            line-height: 1.6;
+        }
+
+        .lesson-item {
+            background: #fff;
+            border-radius: 12px;
+            border: 0.5px solid #e0ddd5;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .lesson-item:active {
+            border-color: #534AB7;
+            background: #f9f8f6;
+        }
+
+        .lesson-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .lesson-desc {
+            font-size: 12px;
+            color: #5f5e5a;
+            margin-top: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #5f5e5a;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #EEEDFE;
+            color: #534AB7;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e0ddd5;
+            margin: 16px 0;
+        }
+
+        .link {
+            color: #534AB7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="app-container">
-    <div class="logo-banner">
-      <div class="logo-display">
-        <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#FFF8F0;stop-opacity:1" />
-              <stop offset="50%" style="stop-color:#E8C5B8;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#D3AF91;stop-opacity:1" />
-            </linearGradient>
-            <linearGradient id="rg2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#D3AF91;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#A68373;stop-opacity:1" />
-            </linearGradient>
-            <filter id="shadow">
-              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
-            </filter>
-          </defs>
-          <path d="M 15 20 Q 5 28 8 42 Q 12 55 25 52 Q 30 51 28 42" stroke="url(#rg2)" stroke-width="9" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
-          <path d="M 50 10 Q 35 18 35 35 Q 35 50 50 55" stroke="url(#rg2)" stroke-width="10" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
-          <path d="M 85 15 L 85 65 M 85 40 Q 100 35 100 25 Q 100 15 85 18" stroke="url(#rg2)" stroke-width="9" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
-          <circle cx="60" cy="35" r="14" fill="url(#rg1)" filter="url(#shadow)"/>
-          <path d="M 48 52 Q 60 48 72 52 L 75 75 Q 72 85 60 87 Q 48 85 45 75 Z" fill="url(#rg1)" filter="url(#shadow)"/>
-          <circle cx="105" cy="20" r="4" fill="url(#rg1)" filter="url(#shadow)"/>
-          <line x1="105" y1="28" x2="105" y2="40" stroke="url(#rg2)" stroke-width="3" stroke-linecap="round" filter="url(#shadow)"/>
-          <path d="M 15 65 Q 18 75 25 80" stroke="#4169E1" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
-        </svg>
-      </div>
-      <div class="logo-text">
-        <h1>Shruti</h1>
-        <p>Dress Design · Learn · Create</p>
-      </div>
-    </div>
-
-    <div class="header">
-      <div class="header-title">DesignCraft Studio</div>
-      <div class="nav">
-        <button class="nav-btn active" onclick="showSection('learn', this)">Learn</button>
-        <button class="nav-btn" onclick="showSection('sketch', this)">Sketch</button>
-        <button class="nav-btn" onclick="showSection('ideas', this)">Ideas</button>
-        <button class="nav-btn" onclick="showSection('tips', this)">Tips</button>
-      </div>
-    </div>
-
-    <div class="content">
-      <!-- LEARN SECTION -->
-      <div id="learn" class="section active">
-        <div class="card">
-          <div class="card-title"><i class="ti ti-sparkles"></i> Welcome to Shruti</div>
-          <div class="card-text">Your personalized dress design learning platform. Master fabric types, measurements, silhouettes, and embroidery techniques to create beautiful dresses.</div>
+    <div class="app-container">
+        <div class="logo-banner">
+            <div class="logo-display"><svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">&nbsp;<defs>&nbsp;<linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="100%">&nbsp; &nbsp;</linearGradient>
+                        <linearGradient id="rg2" x1="0%" y1="0%" x2="100%" y2="100%">&nbsp; &nbsp;</linearGradient>
+                        <filter id="shadow">&nbsp;&nbsp;</filter>&nbsp;
+                    </defs>
+                    <path d="M 15 20 Q 5 28 8 42 Q 12 55 25 52 Q 30 51 28 42" stroke="url(#rg2)" stroke-width="9" fill="none" stroke-linecap="round" filter="url(#shadow)"></path>
+                    <path d="M 50 10 Q 35 18 35 35 Q 35 50 50 55" stroke="url(#rg2)" stroke-width="10" fill="none" stroke-linecap="round" filter="url(#shadow)"></path>
+                    <path d="M 85 15 L 85 65 M 85 40 Q 100 35 100 25 Q 100 15 85 18" stroke="url(#rg2)" stroke-width="9" fill="none" stroke-linecap="round" filter="url(#shadow)"></path>
+                    <path d="M 48 52 Q 60 48 72 52 L 75 75 Q 72 85 60 87 Q 48 85 45 75 Z" fill="url(#rg1)" filter="url(#shadow)"></path>
+                    <line x1="105" y1="28" x2="105" y2="40" stroke="url(#rg2)" stroke-width="3" stroke-linecap="round" filter="url(#shadow)"></line>
+                    <path d="M 15 65 Q 18 75 25 80" stroke="#4169E1" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"></path>&nbsp;
+                </svg></div>
+            <div class="logo-text">
+                <h1>Shruti</h1>
+                <p>Dress Design &middot; Learn &middot; Create</p>
+            </div>
         </div>
-        <div class="card">
-          <div class="card-title"><i class="ti ti-school"></i> Beginner lessons</div>
-          <div class="lesson-item" onclick="askAI('Teach me about basic fabric types in dress designing - explain each type with properties and best uses')">
-            <div class="lesson-title">Understanding fabric types</div>
-            <div class="lesson-desc">Cotton, silk, chiffon & more · 5 min</div>
-          </div>
-          <div class="lesson-item" onclick="askAI('How do I take accurate body measurements for dress making? Give step by step instructions')">
-            <div class="lesson-title">Taking measurements</div>
-            <div class="lesson-desc">Body measurements guide · 6 min</div>
-          </div>
+        <div class="header">
+            <div class="header-title">DesignCraft Studio</div>
+            <div class="nav"><button class="nav-btn active" onclick="showSection('learn', this)">Learn</button> <button class="nav-btn" onclick="showSection('sketch', this)">Sketch</button> <button class="nav-btn" onclick="showSection('ideas', this)">Ideas</button> <button class="nav-btn" onclick="showSection('tips', this)">Tips</button> <button class="nav-btn" onclick="showSection('about', this)">About</button></div>
         </div>
-        <div class="card">
-          <div class="card-title"><i class="ti ti-trending-up"></i> Intermediate lessons</div>
-          <div class="lesson-item" onclick="askAI('Teach me about different dress silhouettes: A-line, bodycon, wrap, fitted, etc. with examples')">
-            <div class="lesson-title">Dress silhouettes</div>
-            <div class="lesson-desc">A-line, wrap, bodycon & more · 8 min</div>
-          </div>
-          <div class="lesson-item" onclick="askAI('How do embroidery and embellishments work in dress design? Explain techniques and applications')">
-            <div class="lesson-title">Embroidery & embellishments</div>
-            <div class="lesson-desc">Patterns, beads, lace · 10 min</div>
-          </div>
+        <div class="content"><!-- LEARN SECTION -->
+            <div id="learn" class="section active">
+                <div class="card">
+                    <div class="card-title">Welcome to Shruti</div>
+                    <div class="card-text">Your personalized dress design learning platform powered by AI. Master fabric types, measurements, silhouettes, and embroidery techniques to create beautiful dresses.</div>
+                    <div class="badge">Powered by Claude AI</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Beginner lessons</div>
+                    <div class="lesson-item" onclick="askAI('Teach me about basic fabric types in dress designing - explain each type with properties and best uses')">
+                        <div class="lesson-title">Understanding fabric types</div>
+                        <div class="lesson-desc">Cotton, silk, chiffon &amp; more &middot; 5 min</div>
+                    </div>
+                    <div class="lesson-item" onclick="askAI('How do I take accurate body measurements for dress making? Give step by step instructions')">
+                        <div class="lesson-title">Taking measurements</div>
+                        <div class="lesson-desc">Body measurements guide &middot; 6 min</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Intermediate lessons</div>
+                    <div class="lesson-item" onclick="askAI('Teach me about different dress silhouettes: A-line, bodycon, wrap, fitted, etc. with examples')">
+                        <div class="lesson-title">Dress silhouettes</div>
+                        <div class="lesson-desc">A-line, wrap, bodycon &amp; more &middot; 8 min</div>
+                    </div>
+                    <div class="lesson-item" onclick="askAI('How do embroidery and embellishments work in dress design? Explain techniques and applications')">
+                        <div class="lesson-title">Embroidery &amp; embellishments</div>
+                        <div class="lesson-desc">Patterns, beads, lace &middot; 10 min</div>
+                    </div>
+                </div>
+            </div><!-- SKETCH SECTION -->
+            <div id="sketch" class="section">
+                <div class="card">
+                    <div class="card-title">Step-by-step guides</div>
+                    <div class="card-text">Learn how to make different dress styles with detailed AI-powered instructions, tips, and fabric recommendations.</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make an A-line dress from scratch')">
+                    <div class="lesson-title">A-line dress</div>
+                    <div class="lesson-desc">6 steps &middot; Beginner friendly ↗</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make a wrap dress from scratch')">
+                    <div class="lesson-title">Wrap dress</div>
+                    <div class="lesson-desc">7 steps &middot; Beginner friendly ↗</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make an Anarkali dress from scratch')">
+                    <div class="lesson-title">Anarkali dress</div>
+                    <div class="lesson-desc">8 steps &middot; Intermediate ↗</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make a shirt dress from scratch')">
+                    <div class="lesson-title">Shirt dress</div>
+                    <div class="lesson-desc">7 steps &middot; Beginner friendly ↗</div>
+                </div>
+            </div><!-- IDEAS SECTION -->
+            <div id="ideas" class="section">
+                <div class="card">
+                    <div class="card-title">Design ideas</div>
+                    <div class="card-text">Select a fabric to get AI-powered dress design suggestions with complete step-by-step making instructions.</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('I have cotton fabric. Give me 5 dress design ideas for casual daily wear with complete step by step instructions on how to make each one')">
+                    <div class="lesson-title">Cotton dresses</div>
+                    <div class="lesson-desc">Light, breathable, everyday ↗</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('I have silk fabric. Give me 5 dress design ideas for party and formal occasions with complete step by step instructions on how to make each one')">
+                    <div class="lesson-title">Silk dresses</div>
+                    <div class="lesson-desc">Elegant, luxurious, occasions ↗</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('I have chiffon fabric. Give me 5 dress design ideas with complete step by step instructions on how to make each one')">
+                    <div class="lesson-title">Chiffon dresses</div>
+                    <div class="lesson-desc">Flowy, lightweight, versatile ↗</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('I have denim fabric. Give me 5 dress design ideas with complete step by step instructions on how to make each one')">
+                    <div class="lesson-title">Denim dresses</div>
+                    <div class="lesson-desc">Casual, durable, timeless ↗</div>
+                </div>
+            </div><!-- TIPS SECTION -->
+            <div id="tips" class="section">
+                <div class="card">
+                    <div class="card-title">Design tips</div>
+                    <div class="card-text">Quick tips to improve your dress designing skills and create professional results.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Colour pairing</div>
+                    <div class="card-text">Pair warm fabrics like silk and brocade with jewel tones &mdash; deep emerald, royal blue, or burgundy. Lighter cotton works great with pastels and earthy neutrals.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Fabric &amp; silhouette</div>
+                    <div class="card-text">Flowy fabrics like chiffon and georgette suit A-line and maxi styles. Structured fabrics like denim and brocade work best with fitted or tailored cuts.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Beginner tip</div>
+                    <div class="card-text">Always wash and iron your fabric before cutting. Fabric can shrink after the first wash, which may ruin your measurements and the final fit of the dress.</div>
+                </div>
+                <div class="lesson-item" onclick="askAI('Give me 5 advanced professional dress designing tips for experienced designers and tailors')">
+                    <div class="lesson-title">Advanced tips ↗</div>
+                    <div class="lesson-desc">For experienced designers and tailors</div>
+                </div>
+            </div><!-- ABOUT SECTION -->
+            <div id="about" class="section">
+                <div class="card">
+                    <div class="card-title">About Shruti</div>
+                    <div class="card-text">Shruti is an <strong>educational app for learning dress design</strong>. It&apos;s designed for dress makers, designers, and fashion enthusiasts of all levels.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Powered by Claude AI</div>
+                    <div class="card-text">This app uses <strong>Claude AI</strong> (created by Anthropic) to provide intelligent dress design guidance, step-by-step instructions, and personalized suggestions.</div>
+                    <div class="divider"><br></div>
+                    <p style="font-size: 13px; color: #5f5e5a; line-height: 1.6;"><strong>Important:</strong> Some features (like asking for detailed guidance) require internet connection and use Claude AI to generate responses. The app works offline for learning materials.</p>
+                    <p style="font-size: 11px; color: #999; margin-top: 12px;">Claude is a trademark of Anthropic. Visit <a href="https://www.anthropic.com/" class="link" target="_blank">anthropic.com</a></p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Public Educational App</div>
+                    <div class="card-text">This is a <strong>public educational application</strong> available to all users worldwide. It&apos;s free and designed to help people learn dress design skills.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Privacy &amp; Terms</div>
+                    <div style="font-size: 13px; color: #5f5e5a; line-height: 1.8;">
+                        <p>📋 <a href="javascript%3AshowModal('privacy')" class="link">Privacy Policy</a></p>
+                        <p>📝 <a href="javascript%3AshowModal('terms')" class="link">Terms of Service</a></p>
+                        <p>⚖️ <a href="javascript%3AshowModal('license')" class="link">License &amp; Attribution</a></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Made with ❤️</div>
+                    <div class="card-text">Shruti was created to make dress design learning accessible, fun, and interactive for everyone. Your feedback helps us improve!</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <p style="font-size: 12px; color: #999;">Version 1.0<br>Powered by Claude AI by Anthropic</p>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- SKETCH SECTION -->
-      <div id="sketch" class="section">
-        <div class="card">
-          <div class="card-title"><i class="ti ti-pencil"></i> Step-by-step guides</div>
-          <div class="card-text">Learn how to make different dress styles with detailed instructions, tips, and fabric recommendations.</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make an A-line dress from scratch')">
-          <div class="lesson-title">A-line dress</div>
-          <div class="lesson-desc">6 steps · Beginner friendly ↗</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make a wrap dress from scratch')">
-          <div class="lesson-title">Wrap dress</div>
-          <div class="lesson-desc">7 steps · Beginner friendly ↗</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make an Anarkali dress from scratch')">
-          <div class="lesson-title">Anarkali dress</div>
-          <div class="lesson-desc">8 steps · Intermediate ↗</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('Give me a complete step by step guide with detailed instructions, measurements, and tips to make a shirt dress from scratch')">
-          <div class="lesson-title">Shirt dress</div>
-          <div class="lesson-desc">7 steps · Beginner friendly ↗</div>
-        </div>
-      </div>
-
-      <!-- IDEAS SECTION -->
-      <div id="ideas" class="section">
-        <div class="card">
-          <div class="card-title"><i class="ti ti-bulb"></i> Design ideas</div>
-          <div class="card-text">Select a fabric to get AI-powered dress design suggestions with complete step-by-step making instructions.</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('I have cotton fabric. Give me 5 dress design ideas for casual daily wear with complete step by step instructions on how to make each one')">
-          <div class="lesson-title">Cotton dresses</div>
-          <div class="lesson-desc">Light, breathable, everyday ↗</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('I have silk fabric. Give me 5 dress design ideas for party and formal occasions with complete step by step instructions on how to make each one')">
-          <div class="lesson-title">Silk dresses</div>
-          <div class="lesson-desc">Elegant, luxurious, occasions ↗</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('I have chiffon fabric. Give me 5 dress design ideas with complete step by step instructions on how to make each one')">
-          <div class="lesson-title">Chiffon dresses</div>
-          <div class="lesson-desc">Flowy, lightweight, versatile ↗</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('I have denim fabric. Give me 5 dress design ideas with complete step by step instructions on how to make each one')">
-          <div class="lesson-title">Denim dresses</div>
-          <div class="lesson-desc">Casual, durable, timeless ↗</div>
-        </div>
-      </div>
-
-      <!-- TIPS SECTION -->
-      <div id="tips" class="section">
-        <div class="card">
-          <div class="card-title"><i class="ti ti-lightbulb"></i> Design tips</div>
-          <div class="card-text">Quick tips to improve your dress designing skills and create professional results.</div>
-        </div>
-        <div class="card">
-          <div class="card-title"><i class="ti ti-palette"></i> Colour pairing</div>
-          <div class="card-text">Pair warm fabrics like silk and brocade with jewel tones — deep emerald, royal blue, or burgundy. Lighter cotton works great with pastels and earthy neutrals.</div>
-        </div>
-        <div class="card">
-          <div class="card-title"><i class="ti ti-scissors"></i> Fabric & silhouette</div>
-          <div class="card-text">Flowy fabrics like chiffon and georgette suit A-line and maxi styles. Structured fabrics like denim and brocade work best with fitted or tailored cuts.</div>
-        </div>
-        <div class="card">
-          <div class="card-title"><i class="ti ti-alert-circle"></i> Beginner tip</div>
-          <div class="card-text">Always wash and iron your fabric before cutting. Fabric can shrink after the first wash, which may ruin your measurements and the final fit of the dress.</div>
-        </div>
-        <div class="lesson-item" onclick="askAI('Give me 5 advanced professional dress designing tips for experienced designers and tailors')">
-          <div class="lesson-title">Advanced tips ↗</div>
-          <div class="lesson-desc">For experienced designers and tailors</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function showSection(id, btn) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      btn.classList.add('active');
-    }
-
-    function askAI(prompt) {
-      if (typeof sendPrompt === 'function') {
-        sendPrompt(prompt);
-      } else {
-        alert('Connect to Claude AI for detailed responses:\n\n' + prompt);
-      }
-    }
-
-    // Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
-    }
-
-    // Handle app shortcuts
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get('tab');
-    if (tab) {
-      const btn = document.querySelector(`[onclick*="'${tab}'"]`);
-      if (btn) btn.click();
-    }
-  </script>
-</body>
-</html>
+    </div><!-- MODALS -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2><button class="close-btn" onclick="closeModal('privacy')">&times;</button>
+            </div>
+            <div style="font-size: 13px; color: #5f5e5a; line-height: 1.8;">
+                <h3 style="font-size: 14px; margin-top: 12px;">Data Collection</h3>
+                <p>We collect minimal personal information. The app works primarily offline and only connects to Claude AI when you request detailed guidance.</p>
+                <h3 style="font-size: 14px; margin-top: 12px;">Claude AI Integration</h3>
+               
